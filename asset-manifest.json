@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/the-laughing-cart-frontend/static/css/main.7ada8d06.css",
-    "main.js": "/the-laughing-cart-frontend/static/js/main.a6d3602c.js",
-    "static/js/453.8b24c4dc.chunk.js": "/the-laughing-cart-frontend/static/js/453.8b24c4dc.chunk.js",
-    "static/media/thelaughingcartlogo.png": "/the-laughing-cart-frontend/static/media/thelaughingcartlogo.baacf92dcb4ae649c44d.png",
-    "index.html": "/the-laughing-cart-frontend/index.html",
-    "main.7ada8d06.css.map": "/the-laughing-cart-frontend/static/css/main.7ada8d06.css.map",
-    "main.a6d3602c.js.map": "/the-laughing-cart-frontend/static/js/main.a6d3602c.js.map",
-    "453.8b24c4dc.chunk.js.map": "/the-laughing-cart-frontend/static/js/453.8b24c4dc.chunk.js.map"
+    "main.css": "/The-Laughing-Cart/static/css/main.7ada8d06.css",
+    "main.js": "/The-Laughing-Cart/static/js/main.27f1286f.js",
+    "static/js/453.8b24c4dc.chunk.js": "/The-Laughing-Cart/static/js/453.8b24c4dc.chunk.js",
+    "static/media/thelaughingcartlogo.png": "/The-Laughing-Cart/static/media/thelaughingcartlogo.baacf92dcb4ae649c44d.png",
+    "index.html": "/The-Laughing-Cart/index.html",
+    "main.7ada8d06.css.map": "/The-Laughing-Cart/static/css/main.7ada8d06.css.map",
+    "main.27f1286f.js.map": "/The-Laughing-Cart/static/js/main.27f1286f.js.map",
+    "453.8b24c4dc.chunk.js.map": "/The-Laughing-Cart/static/js/453.8b24c4dc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7ada8d06.css",
-    "static/js/main.a6d3602c.js"
+    "static/js/main.27f1286f.js"
   ]
 }
