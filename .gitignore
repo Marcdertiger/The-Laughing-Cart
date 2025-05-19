@@ -57,3 +57,6 @@ build-iPhoneSimulator/
 
 # remove local environement variables
 .env*
+
+.DS_Store
+development.log
