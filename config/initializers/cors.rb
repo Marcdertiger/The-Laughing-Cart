@@ -8,7 +8,7 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
     allow do
       origins(
-        Rails.env.production? ? 'https://marcdertiger.github.io' : 'http://localhost:3000'
+        ENV['ENVIRONMENT'] != 'development' ? 'https://marcdertiger.github.io' : 'http://localhost:3000'
       )
   
       resource '*',
