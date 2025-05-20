@@ -70,10 +70,10 @@ Login:
 Initialize the app:
 `fly launch`
 
-Add a PostgreSQL database:
+Add a PostgreSQL database(if fly launch didn't do it):
 `fly postgres create --name the-laughing-cart-db`
 
-Attach it to your app:
+tach it to your app(if fly launch didn't do it):
 `fly postgres attach --app the-laughing-cart-backend --postgres-app the-laughing-cart-db`
 
 Deploy:
