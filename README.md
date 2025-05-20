@@ -35,23 +35,42 @@ Here are the ways I have used LLM based tools during this project
 - No caching, CDN or more advanced at scale tech
 - No use of react context or more elaborate state management concepts
   - I'm very rusty on those and used ChatGPT to help a little to get some basic triggers happening as an alternative
-- 
 
 
+## Boilerplate
 
+[Steps to create base project](BOILERPLACE.md)
 
 
 ## Running Locally
 ### Frontend
-`npm start` will run the 
+1. Set a .env.development file with the following
+```
+REACT_APP_API_BASE_URL=http://localhost:3001
+REACT_APP_SMILE_CHANNEL_KEY=your_smile_channel_key
+REACT_APP_SMILE_CUSTOMER_ID=your_existing_customer_id
+```
+
+2. Set a .env.production file with the folowing
+```
+REACT_APP_API_BASE_URL=https://your-api.fly.dev
+REACT_APP_SMILE_CHANNEL_KEY=your_smile_channel_key
+REACT_APP_SMILE_CUSTOMER_ID=your_existing_customer_id
+```
+Note: This is to fake auth and just use a hard coded customer ID instead
+
+3. Run the front end server
+`npm start`
 
 ### Backend
 #### Set Environment Variables
-1. Rais server: You need to set the following variables in your .env file locally: 
+1. Rails server: You need to set the following variables in your .env file locally: 
 ```
-POSTGRES_USER=marc-andrecouturier
-POSTGRES_PASSWORD=password
-SMILE_API_KEY=your_real_smile_private_key_here
+POSTGRES_USER=your_username_local_db
+POSTGRES_PASSWORD=your_password_local_db
+SMILE_API_PRIVATE_KEY=your_real_test_smile_private_key_here
+LAUGHING_CART_API_KEY=your_real_smile_api_key_here
+ENVIRONMENT=development
 ```
 #### Run command
 `rails s`
@@ -70,10 +89,10 @@ Login:
 Initialize the app:
 `fly launch`
 
-Add a PostgreSQL database:
+Add a PostgreSQL database(if fly launch didn't do it):
 `fly postgres create --name the-laughing-cart-db`
 
-Attach it to your app:
+tach it to your app(if fly launch didn't do it):
 `fly postgres attach --app the-laughing-cart-backend --postgres-app the-laughing-cart-db`
 
 Deploy:
