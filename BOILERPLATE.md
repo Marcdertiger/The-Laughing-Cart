@@ -88,7 +88,7 @@ production:
 ```
 POSTGRES_USER=your_username_local_db
 POSTGRES_PASSWORD=your_password_local_db
-SMILE_API_KEY=your_real_test_smile_private_key_here
+SMILE_API_PRIVATE_KEY=your_real_test_smile_private_key_here
 ```
 
 Then add .env* to .gitignore
