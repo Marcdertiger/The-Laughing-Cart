@@ -1,19 +1,68 @@
 import { useEffect, useRef, useState } from 'react';
 import { initializeSmile } from "./lib/smile";
+import type { SmileCustomer } from './api/types';
 import logo from './assets/thelaughingcartlogo.png';
 import PointsBalance from "./components/PointsBalance";
 import RewardsList from "./components/rewards/RewardsList";
+import MathMiniGame from "./components/MathMiniGame";
+import AdminTools from "./components/AdminTools";
 
 function App() {
   const isAdmin = new URLSearchParams(window.location.search).get("admin") === "true";
   const hasInitializedSmile = useRef(false);
   const [pointsVersion, setPointsVersion] = useState(0);
 
+  const mockCustomer: SmileCustomer = {
+    id: 304169228,
+    first_name: "Jane",
+    last_name: "Doe",
+    email: "jane@doe.com",
+    state: "member",
+    date_of_birth: "1004-05-27",
+    points_balance: 0,
+    referral_url: "http://i.refs.cc/9qr5Pw",
+    vip_tier_id: null,
+    created_at: "2024-04-04T15:10:42.030Z",
+    updated_at: "2024-04-04T15:10:42.030Z"
+  };
+
+  const [customer, setCustomer] = useState<SmileCustomer>(mockCustomer);
+
   useEffect(() => {
     if (hasInitializedSmile.current) return;
     hasInitializedSmile.current = true;
-
-    initializeSmile();
+  
+    const initialize = async () => {
+      initializeSmile();
+  
+      const waitForSmile = () =>
+        new Promise<void>((resolve) => {
+          if ((window as any).SmileUI?.ready && (window as any).Smile) {
+            resolve();
+          } else {
+            document.addEventListener("smile-ui-loaded", () => resolve(), {
+              once: true,
+            });
+          }
+        });
+  
+      await waitForSmile();
+  
+      try {
+        await (window as any).SmileUI.ready();
+        const result = await (window as any).SmileUI.customerReady();
+  
+        if (result) {
+          setCustomer(result as SmileCustomer);
+        } else {
+          console.warn("No Smile customer found");
+        }
+      } catch (err) {
+        console.error("Error initializing Smile SDK:", err);
+      }
+    };
+  
+    initialize();
   }, []);
 
   return (
@@ -40,16 +89,14 @@ function App() {
         </section>
 
         <section className="bg-white p-6 rounded-xl shadow-md">
-          <h2 className="text-xl font-semibold mb-4">Daily Math Challenge</h2>
-          {/* Replace with actual component */}
-          <div className="text-gray-500 italic">[Math Challenge Placeholder]</div>
+          <h2 className="text-xl font-semibold mb-4">Daily Math Mini Game</h2>
+          <MathMiniGame onSuccess={() => setPointsVersion((v) => v + 1)} />
         </section>
 
-        {isAdmin && (
+        {isAdmin &&  (
           <section className="bg-white p-6 rounded-xl shadow-md border border-yellow-300">
             <h2 className="text-xl font-semibold mb-4 text-yellow-600">Admin Tools</h2>
-            {/* Replace with actual component */}
-            <div className="text-gray-500 italic">[Admin Points Adjuster Placeholder]</div>
+            <AdminTools customer={customer} onSuccess={() => setPointsVersion((v) => v + 1)} />
           </section>
         )}
       </main>
@@ -59,6 +106,6 @@ function App() {
       </footer>
     </div>
   );
-};
+}
 
 export default App;

@@ -18,7 +18,7 @@ const RewardCard = ({
 }: RewardCardProps) => {
   const isVariable = reward.exchange_type === "variable";
   const [customAmount, setCustomAmount] = useState(reward.minimum_points_price);
-  const canRedeem = !isRedeeming && (!isVariable || customerPoints >= customAmount);
+  const canRedeem = !isRedeeming && (customerPoints >= customAmount);
 
   return (
     <div className="border rounded-lg shadow-sm p-4 flex gap-4 items-start bg-white">

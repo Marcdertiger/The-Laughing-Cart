@@ -5,6 +5,13 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  post '/smile-auth', to: 'loyalty#auth_token'
-  get '/points', to: 'loyalty#points'
+  namespace :api do
+    namespace :smile do
+      post '/authorize', to: 'loyalty#authorize'
+      post '/mini_game/status', to: 'mini_game#status'
+      post '/mini_game/submit', to: 'mini_game#submit'
+      post "admin/adjust_points", to: "admin#adjust_points"
+      delete "admin/reset_mini_game", to: "admin#reset_mini_game"
+    end
+  end  
 end

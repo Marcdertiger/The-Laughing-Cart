@@ -15,8 +15,6 @@ export const initializeSmile = async () => {
       const customer = await (window as any).SmileUI.customerReady();
 
       if (customer) {
-        console.log("Smile customer identified:", customer);
-
         await (window as any).SmileUI.ready();
       } else {
         console.warn("No Smile customer identified");

@@ -14,7 +14,23 @@ class SmileClient
       JSON.parse(response.body) if response.success?
     rescue Faraday::Error => e
       Rails.logger.error("SmileClient fetch failed: #{e.message}")
-      nil
+    end
+
+    def issue_points(customer_id, points_change, description, internal_note="System Generated")
+      response = @conn.post("/v1/points_transactions") do |req|
+        req.body = {
+          points_transaction: {
+            customer_id:,
+            points_change:,
+            description:,
+            internal_note:
+          }
+        }.to_json
+      end
+      
+      JSON.parse(response.body) if response.success?
+    rescue Faraday::Error => e
+      Rails.logger.error("SmileClient point issuing has failed: #{e.message}")
     end
   end
   

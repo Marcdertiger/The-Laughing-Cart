@@ -4,7 +4,12 @@ import RewardCardSkeleton from "./RewardCardSkeleton";
 import Coupon from "./Coupon";
 import type { Reward, PointsPurchase } from "./types";
 
-const RewardsList = ({ onRedeemSuccess }: { onRedeemSuccess?: () => void }) => {
+interface RewardsListProps {
+  onRedeemSuccess?: () => void;
+  refreshTrigger?: number;
+}
+
+const RewardsList = ({ onRedeemSuccess, refreshTrigger }: RewardsListProps) => {
   const [rewards, setRewards] = useState<Reward[]>([]);
   const [loading, setLoading] = useState(true);
   const [redeemingId, setRedeemingId] = useState<number | null>(null);
@@ -47,32 +52,32 @@ const RewardsList = ({ onRedeemSuccess }: { onRedeemSuccess?: () => void }) => {
     };
 
     loadRewards();
-  }, []);
+  }, [refreshTrigger]);
 
   const redeem = async (productId: number, pointsAmount?: number) => {
-  try {
-    setRedeemingId(productId);
-    const Smile = (window as any).Smile;
-    const product = await Smile.fetchPointsProduct(productId);
+    try {
+      setRedeemingId(productId);
+      const Smile = (window as any).Smile;
+      const product = await Smile.fetchPointsProduct(productId);
 
-    let purchase: PointsPurchase;
+      let purchase: PointsPurchase;
 
-    if (product.exchange_type === "variable") {
-      if (!pointsAmount) throw new Error("Variable reward requires a points amount.");
-      purchase = await Smile.purchasePointsProduct(productId, { points_to_spend: pointsAmount });
-    } else {
-      purchase = await Smile.purchasePointsProduct(productId);
+      if (product.exchange_type === "variable") {
+        if (!pointsAmount) throw new Error("Variable reward requires a points amount.");
+        purchase = await Smile.purchasePointsProduct(productId, { points_to_spend: pointsAmount });
+      } else {
+        purchase = await Smile.purchasePointsProduct(productId);
+      }
+
+      setRedeemedPurchase(purchase);
+      onRedeemSuccess?.();
+    } catch (err) {
+      console.error("Failed to redeem reward:", err);
+      setRedeemedPurchase(null);
+    } finally {
+      setRedeemingId(null);
     }
-    console.log(purchase);
-    setRedeemedPurchase(purchase);
-    onRedeemSuccess?.();
-  } catch (err) {
-    console.error("Failed to redeem reward:", err);
-    setRedeemedPurchase(null);
-  } finally {
-    setRedeemingId(null);
-  }
-};
+  };
 
   return (
     <div className="transition-all duration-700 ease-in-out">
@@ -93,10 +98,9 @@ const RewardsList = ({ onRedeemSuccess }: { onRedeemSuccess?: () => void }) => {
             />
           ))
         )}
-      {redeemedPurchase?.fulfilled_reward && (
-        <Coupon reward={redeemedPurchase.fulfilled_reward} />
-      )}
-
+        {redeemedPurchase?.fulfilled_reward && (
+          <Coupon reward={redeemedPurchase.fulfilled_reward} />
+        )}
       </div>
     </div>
   );
