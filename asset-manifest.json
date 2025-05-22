@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/The-Laughing-Cart/static/css/main.0930a2dc.css",
-    "main.js": "/The-Laughing-Cart/static/js/main.95bc53f0.js",
+    "main.js": "/The-Laughing-Cart/static/js/main.1b8ea2c2.js",
     "static/js/453.8b24c4dc.chunk.js": "/The-Laughing-Cart/static/js/453.8b24c4dc.chunk.js",
     "static/media/thelaughingcartlogo.png": "/The-Laughing-Cart/static/media/thelaughingcartlogo.baacf92dcb4ae649c44d.png",
     "index.html": "/The-Laughing-Cart/index.html",
     "main.0930a2dc.css.map": "/The-Laughing-Cart/static/css/main.0930a2dc.css.map",
-    "main.95bc53f0.js.map": "/The-Laughing-Cart/static/js/main.95bc53f0.js.map",
+    "main.1b8ea2c2.js.map": "/The-Laughing-Cart/static/js/main.1b8ea2c2.js.map",
     "453.8b24c4dc.chunk.js.map": "/The-Laughing-Cart/static/js/453.8b24c4dc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0930a2dc.css",
-    "static/js/main.95bc53f0.js"
+    "static/js/main.1b8ea2c2.js"
   ]
 }
