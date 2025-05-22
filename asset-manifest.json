@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/The-Laughing-Cart/static/css/main.72f4df55.css",
-    "main.js": "/The-Laughing-Cart/static/js/main.9d5aad8b.js",
+    "main.css": "/The-Laughing-Cart/static/css/main.0930a2dc.css",
+    "main.js": "/The-Laughing-Cart/static/js/main.80da798e.js",
     "static/js/453.8b24c4dc.chunk.js": "/The-Laughing-Cart/static/js/453.8b24c4dc.chunk.js",
     "static/media/thelaughingcartlogo.png": "/The-Laughing-Cart/static/media/thelaughingcartlogo.baacf92dcb4ae649c44d.png",
     "index.html": "/The-Laughing-Cart/index.html",
-    "main.72f4df55.css.map": "/The-Laughing-Cart/static/css/main.72f4df55.css.map",
-    "main.9d5aad8b.js.map": "/The-Laughing-Cart/static/js/main.9d5aad8b.js.map",
+    "main.0930a2dc.css.map": "/The-Laughing-Cart/static/css/main.0930a2dc.css.map",
+    "main.80da798e.js.map": "/The-Laughing-Cart/static/js/main.80da798e.js.map",
     "453.8b24c4dc.chunk.js.map": "/The-Laughing-Cart/static/js/453.8b24c4dc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.72f4df55.css",
-    "static/js/main.9d5aad8b.js"
+    "static/css/main.0930a2dc.css",
+    "static/js/main.80da798e.js"
   ]
 }
