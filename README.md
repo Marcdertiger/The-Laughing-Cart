@@ -4,6 +4,12 @@
 
 [Project Details](PROJECT.md)
 
+## Production Link
+The server can take a little to spin up sometimes, just give it a few seconds and a reload should do it.
+[Click Here](https://marcdertiger.github.io/The-Laughing-Cart/)
+
+## Boilerplate Details
+[Click Here](BOILERPLATE.md)
 
 ## AI Use Disclainer
 Here are the ways I have used LLM based tools during this project
@@ -12,7 +18,7 @@ Here are the ways I have used LLM based tools during this project
 3. Provide examples on things I am less familiar with or rusty, mostly front-end
 4. Used to quickly template a simple site and styling to save time
 5. Provided the smile.io SDK and API definitions and queries on how to implement some low level items
-6. No copy paste of large amounts of code / no code vibing / avoid reliance on AI for the problem parts of the project.
+6. No code vibing & a concious effort to avoid reliance on AI for the problem parts of the project.
 
 
 ## Initial Decisions - Deployment & Stack
@@ -34,12 +40,12 @@ Here are the ways I have used LLM based tools during this project
 - No elaborate environment setup, only dev+prod
 - No caching, CDN or more advanced at scale tech
 - No use of react context or more elaborate state management concepts
-  - I'm very rusty on those and used ChatGPT to help a little to get some basic triggers happening as an alternative
+  - I just build component by componenent and ran out of time to refactor into how it should actually be (state management)
 
-
-## Boilerplate
-
-[Steps to create base project](BOILERPLACE.md)
+## Known Issues and Improvements
+- Front end needs a global context to handle customer data to prevent multiple fetching at component level
+  and provide easy reloading of the customer whenever actions are taken
+  - Using react context, or redux or hooks (maybe) could have worked better than the very non-ideal implementation I have here. 
 
 
 ## Running Locally
@@ -71,6 +77,7 @@ POSTGRES_PASSWORD=your_password_local_db
 SMILE_API_PRIVATE_KEY=your_real_test_smile_private_key_here
 LAUGHING_CART_API_KEY=your_real_smile_api_key_here
 ENVIRONMENT=development
+SMILE_MATH_MINIGAME_ACTIVITY_ID=custom_activity_id_for_minigame_you_created_here
 ```
 #### Run command
 `rails s`
@@ -80,6 +87,8 @@ ENVIRONMENT=development
 Be in the right branch you want to deploy before you start
 
 ### Fly.io Backend
+Add the SMILE_API_KEY to your secrets. 
+
 Install the CLI:
 `brew install flyctl`
 
@@ -92,7 +101,7 @@ Initialize the app:
 Add a PostgreSQL database(if fly launch didn't do it):
 `fly postgres create --name the-laughing-cart-db`
 
-tach it to your app(if fly launch didn't do it):
+Attach it to your app(if fly launch didn't do it):
 `fly postgres attach --app the-laughing-cart-backend --postgres-app the-laughing-cart-db`
 
 Deploy:
