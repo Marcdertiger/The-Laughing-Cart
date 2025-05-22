@@ -1,5 +1,5 @@
 import api from './client';
-import type { MiniGameResponse, BooleanRequestResponse, MiniGameSubmission } from "./types";
+import type { MiniGameResponse, MiniGameResult, MiniGameSubmission } from "./types";
 
 export const getMiniGame = async (customer_id: number): Promise<MiniGameResponse> => {
   const response = await api.post('api/smile/mini_game/status', {
@@ -8,7 +8,7 @@ export const getMiniGame = async (customer_id: number): Promise<MiniGameResponse
   return response.data;
 };
 
-export const submitMiniGame = async (submission: MiniGameSubmission): Promise<BooleanRequestResponse> => {
+export const submitMiniGame = async (submission: MiniGameSubmission): Promise<MiniGameResult> => {
   
   const response = await api.post('api/smile/mini_game/submit', {
      ...submission

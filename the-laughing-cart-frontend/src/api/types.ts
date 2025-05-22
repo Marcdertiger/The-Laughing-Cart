@@ -18,13 +18,19 @@ export interface MiniGameResponse {
 }
 
 export interface Problem {
+  id: number;
   a: number;
   b: number;
 }
 
 export interface MiniGameSubmission {
+  id: number;
   customer_id: number;
   answer: number;
+}
+
+export interface MiniGameResult extends BooleanRequestResponse {
+  question: Problem;
 }
 
 export interface BooleanRequestResponse {

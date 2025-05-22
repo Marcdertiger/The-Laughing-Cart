@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { SmileCustomer } from "../api/types";
-import { adjustPoints, deleteTodayMiniGame } from "../api/admin";
+import { adjustPoints } from "../api/admin";
 
 interface AdminToolsProps {
   customer: SmileCustomer;
@@ -16,32 +16,12 @@ const AdminTools = ({ customer, onSuccess }: AdminToolsProps) => {
       await adjustPoints({
         customer_id: customer.id,
         points_change: Number(amount),
-        description: "Manual adjustment via admin tools"
+        description: "Manual adjustment via admin tools",
       });
-      setFeedback("✅ Points were updated by: " + amount + "points."
-      );
+      setFeedback(`✅ Points were updated by: ${amount} points.`);
       onSuccess();
     } catch (err) {
       setFeedback("❌ Error adjusting points.");
-    }
-  };
-
-  const handleDeleteMiniGame = async () => {
-    try {
-      const res = await deleteTodayMiniGame(customer.id);
-      console.log(res);
-      if (res.success && res.deleted) {
-        // We'd be nice to include reloading the mini game component here.
-        // This could be done better by trigger or state etc
-        // I'm just a bit tired so this will do for an MVP
-        setFeedback("Mini Game was deleted.");
-      } else if (res.success) {
-        setFeedback(" No Minigame to delete. Reload your page (sorry about that!).");
-      } else {
-        setFeedback("An error occured.");
-      }
-    } catch (err) {
-      setFeedback("❌ Error deleting the mini game.");
     }
   };
 
@@ -67,13 +47,6 @@ const AdminTools = ({ customer, onSuccess }: AdminToolsProps) => {
           Add/Remove Points
         </button>
       </div>
-
-      <button
-        onClick={handleDeleteMiniGame}
-        className="px-4 py-1 bg-red-600 text-white rounded"
-      >
-        Delete Today’s Completed Mini Game
-      </button>
 
       {feedback && <p className="text-sm text-gray-700">{feedback}</p>}
     </div>

@@ -11,7 +11,6 @@ Rails.application.routes.draw do
       post '/mini_game/status', to: 'mini_game#status'
       post '/mini_game/submit', to: 'mini_game#submit'
       post "admin/adjust_points", to: "admin#adjust_points"
-      delete "admin/reset_mini_game", to: "admin#reset_mini_game"
     end
   end  
 end

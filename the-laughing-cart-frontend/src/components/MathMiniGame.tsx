@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getMiniGame, submitMiniGame } from "../api/minigame_client";
-import type { Problem } from "../api/types";
+import type { Problem, MiniGameResponse } from "../api/types";
 
 interface MathMiniGameProps {
   onSuccess: () => void;
@@ -8,7 +8,6 @@ interface MathMiniGameProps {
 
 const MathMiniGame = ({ onSuccess }: MathMiniGameProps) => {
   const [loading, setLoading] = useState(true);
-  const [completed, setCompleted] = useState(false);
   const [question, setQuestion] = useState<Problem | null>(null);
   const [userAnswer, setUserAnswer] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -37,13 +36,8 @@ const MathMiniGame = ({ onSuccess }: MathMiniGameProps) => {
         }
 
         setCustomerId(customer.id);
-
         const result = await getMiniGame(customer.id);
-        if (result.completed) {
-          setCompleted(true);
-        } else {
-          setQuestion(result.question);
-        }
+        setQuestion(result.question);
       } catch (err) {
         setFeedback("Could not load the mini game.");
       } finally {
@@ -62,16 +56,18 @@ const MathMiniGame = ({ onSuccess }: MathMiniGameProps) => {
 
     try {
       const result = await submitMiniGame({
+        id: question.id,
         customer_id: customerId,
         answer: Number(userAnswer),
       });
 
       if (result.success) {
-        setCompleted(true);
-        setFeedback("✅ Correct! You've earned 50 points.");
-        onSuccess(); // refresh the UI component showing customer's points
+        setFeedback("✅ Correct! You've earned points! Reload your page to see your updated balance (Sorry about that!).");
+        setUserAnswer("");
+        setQuestion(result.question); // Update with the new problem
+        onSuccess(); // Trigger refresh of points balance
       } else {
-        setFeedback("❌ Incorrect answer.");
+        setFeedback("❌ Incorrect answer. Try again!");
       }
     } catch (err) {
       setFeedback("Something went wrong.");
@@ -82,19 +78,12 @@ const MathMiniGame = ({ onSuccess }: MathMiniGameProps) => {
 
   if (loading) return <p className="text-sm text-gray-500">Loading mini game...</p>;
 
-  if (completed)
-    return (
-      <p className="text-green-600 text-sm">
-        🐒🐒🐒 You've already completed today's mini game. Come back tomorrow! 🐒🐒🐒
-      </p>
-    );
-
   if (!question)
     return <p className="text-red-500 text-sm">No mini game available.</p>;
 
   return (
     <div className="border rounded-lg p-4 bg-yellow-50 shadow-sm space-y-3">
-      <h2 className="text-lg font-semibold">Daily Math Mini Game</h2>
+      <h2 className="text-lg font-semibold">Math Mini Game</h2>
       <p className="text-sm text-gray-800">
         What is {question.a.toString()} + {question.b.toString()}?
       </p>

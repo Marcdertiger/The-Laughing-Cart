@@ -16,7 +16,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_20_654185) do
 
   create_table "math_mini_game_trackers", force: :cascade do |t|
     t.bigint "customer_id", null: false
-    t.date "attempt_date", null: false
     t.integer "a", null: false
     t.integer "b", null: false
     t.integer "correct_answer", null: false
@@ -24,6 +23,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_20_654185) do
     t.boolean "correct", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["customer_id", "attempt_date"], name: "index_math_mini_game_trackers_on_customer_id_and_attempt_date", unique: true
+    t.index ["updated_at"], name: "index_math_mini_game_trackers_on_updated_at"
   end
 end

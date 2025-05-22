@@ -9,16 +9,9 @@ module Api
         description = params[:description] || "Manual adjustment via admin panel"
 
         client = SmileClient.new
-        client.issue_points(customer_id, points_change, description)
+        client.adjust_points(customer_id, points_change, description)
 
         render json: { success: true }
-      end
-
-      def reset_mini_game
-        customer_id = params.require(:customer_id)
-        deleted = MathMiniGameTracker.where(customer_id: customer_id, attempt_date: Date.today.to_s).delete_all
-
-        render json: { success: true, deleted: deleted > 0 }
       end
 
       private
